@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any
 
 
-class TestNamingValidator:
+class NamingValidator:
     """Validates test files against naming conventions."""
 
     def __init__(self) -> None:
@@ -433,7 +433,7 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    validator = TestNamingValidator()
+    validator = NamingValidator()
     path = Path(args.path)
 
     if path.is_file():

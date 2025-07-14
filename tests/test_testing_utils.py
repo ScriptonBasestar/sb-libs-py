@@ -3,15 +3,15 @@
 from pathlib import Path
 
 from sb_libs.testing import (
-    TestNamingValidator,
+    NamingValidator,
     UnittestToPytestMigrator,
     check_unittest_usage,
 )
 
 
-def test_test_naming_validator_creation() -> None:
-    """Test that TestNamingValidator can be instantiated."""
-    validator = TestNamingValidator()
+def test_naming_validator_creation() -> None:
+    """Test that NamingValidator can be instantiated."""
+    validator = NamingValidator()
     assert validator is not None
     assert hasattr(validator, "validate_file")
     assert hasattr(validator, "validate_directory")
@@ -45,12 +45,12 @@ def test_check_unittest_usage_function() -> None:
 def test_testing_package_imports() -> None:
     """Test that all expected utilities are importable."""
     from sb_libs.testing import (
-        TestNamingValidator,
+        NamingValidator,
         UnittestToPytestMigrator,
         check_unittest_usage,
     )
 
     # All imports should succeed
-    assert TestNamingValidator is not None
+    assert NamingValidator is not None
     assert UnittestToPytestMigrator is not None
     assert check_unittest_usage is not None

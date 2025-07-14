@@ -8,7 +8,7 @@ src/sb_libs/
     ├── __init__.py               # 모든 도구 export
     ├── __main__.py               # CLI 인터페이스
     ├── detect_unittest_usage.py  # unittest 사용 감지
-    ├── test_naming_validator.py  # 테스트 명명 규칙 검증
+    ├── naming_validator.py  # 테스트 명명 규칙 검증
     └── unittest_to_pytest_migrator.py  # unittest→pytest 마이그레이션
 
 ---
@@ -25,7 +25,7 @@ src/sb_libs/
 ## 1. 라이브러리로 사용하기
 
 ```python
-from sb_libs.testing import TestNamingValidator, UnittestToPytestMigrator
+from sb_libs.testing import NamingValidator, UnittestToPytestMigrator
 ```
 
 ---
@@ -44,7 +44,7 @@ python -m sb_libs.testing migrate-unittest tests/ --dry-run
 
 ```bash
 python -m sb_libs.testing.detect_unittest_usage file.py
-python -m sb_libs.testing.test_naming_validator tests/
+python -m sb_libs.testing.naming_validator tests/
 python -m sb_libs.testing.unittest_to_pytest_migrator tests/
 ```
 

@@ -104,7 +104,7 @@ class UnittestToPytestMigrator:
                 stats["manual_review_needed"].extend(manual_items)
 
             # Improve test naming if basic pattern detected
-            content, naming_improvements = self._improve_test_naming(content)
+            content, naming_improvements = self._improve_naming(content)
 
             if content != original_content:
                 if not self.dry_run:
@@ -221,7 +221,7 @@ class UnittestToPytestMigrator:
 
         return content, (setup_changes, teardown_changes), manual_review
 
-    def _improve_test_naming(self, content: str) -> tuple[str, int]:
+    def _improve_naming(self, content: str) -> tuple[str, int]:
         """Apply basic test naming improvements."""
         changes = 0
 
