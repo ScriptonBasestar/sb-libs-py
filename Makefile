@@ -1,10 +1,13 @@
-.PHONY: help install install-dev test lint format typecheck build clean docs pre-commit-install pre-commit-run
+.PHONY: help install install-dev test test-cov coverage-html coverage-xml lint format typecheck build clean docs pre-commit-install pre-commit-run
 
 help:
 	@echo "Available commands:"
 	@echo "  install           - Install package in development mode"
 	@echo "  install-dev       - Install package with development dependencies"
-	@echo "  test              - Run tests with coverage"
+	@echo "  test              - Run tests"
+	@echo "  test-cov          - Run tests with coverage (terminal + HTML + XML)"
+	@echo "  coverage-html     - Generate HTML coverage report"
+	@echo "  coverage-xml      - Generate XML coverage report (same as CI)"
 	@echo "  lint              - Run ruff linter"
 	@echo "  format            - Format code with ruff"
 	@echo "  typecheck         - Run mypy type checker"
@@ -22,6 +25,21 @@ install-dev:
 
 test:
 	uv run pytest
+
+# 커버리지와 함께 테스트 실행
+test-cov:
+	uv run pytest --cov=src/sb_libs --cov-report=term-missing --cov-report=html --cov-report=xml
+
+# 커버리지 리포트 HTML 열기 (브라우저)
+coverage-html:
+	uv run pytest --cov=src/sb_libs --cov-report=html
+	@echo "Coverage report generated at htmlcov/index.html"
+	@echo "Open with: xdg-open htmlcov/index.html (Linux) or open htmlcov/index.html (macOS)"
+
+# 커버리지 XML 생성 (CI용과 동일)
+coverage-xml:
+	uv run pytest --cov=src/sb_libs --cov-report=xml
+	@echo "Coverage XML report generated at coverage.xml"
 
 lint:
 	uv run ruff check .
