@@ -41,9 +41,9 @@ def main() -> int:
         return 0
 
     elif args.command == "validate-naming":
-        from .test_naming_validator import main as validate_main
+        from .naming_validator import main as validate_main
 
-        sys.argv = ["test_naming_validator", args.path]
+        sys.argv = ["naming_validator", args.path]
         if args.detailed:
             sys.argv.append("--detailed")
         if args.fix:
