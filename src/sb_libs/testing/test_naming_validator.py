@@ -9,6 +9,8 @@ This script validates that test files follow the established naming conventions:
 - Docstring presence and format
 """
 
+from __future__ import annotations
+
 import argparse
 import ast
 import re

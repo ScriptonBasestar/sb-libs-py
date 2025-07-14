@@ -10,6 +10,8 @@ This script converts unittest test files to pytest format, including:
 - Basic naming convention improvements
 """
 
+from __future__ import annotations
+
 import argparse
 import re
 import sys

@@ -4,7 +4,7 @@ import sys
 from argparse import ArgumentParser
 
 
-def main():
+def main() -> int:
     """Main CLI entry point."""
     parser = ArgumentParser(prog="sb_libs.testing", description="Testing utilities for Python projects")
 
@@ -37,7 +37,8 @@ def main():
         from .detect_unittest_usage import main as detect_main
 
         sys.argv = ["detect_unittest_usage"] + args.files
-        return detect_main()
+        detect_main()
+        return 0
 
     elif args.command == "validate-naming":
         from .test_naming_validator import main as validate_main
@@ -49,7 +50,8 @@ def main():
             sys.argv.append("--fix")
         if args.dry_run:
             sys.argv.append("--dry-run")
-        return validate_main()
+        validate_main()
+        return 0
 
     elif args.command == "migrate-unittest":
         from .unittest_to_pytest_migrator import main as migrate_main
@@ -59,7 +61,8 @@ def main():
             sys.argv.append("--dry-run")
         if args.pattern != "test_*.py":
             sys.argv.extend(["--pattern", args.pattern])
-        return migrate_main()
+        migrate_main()
+        return 0
 
     return 0
 
