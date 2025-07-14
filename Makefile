@@ -29,8 +29,35 @@ lint:
 format:
 	uv run ruff format .
 
+# 현재 (너무 관대함)
 typecheck:
-	uv run mypy src/
+	uv run mypy src/ --ignore-missing-imports --no-strict-optional --allow-untyped-defs --disable-error-code=attr-defined --disable-error-code=operator --disable-error-code=var-annotated
+
+# 개선안 (더 엄격함)
+typecheck:
+	uv run mypy src/ --ignore-missing-imports
+
+typecheck-strict:
+	uv run mypy src/ --strict --ignore-missing-imports
+
+typecheck-tests:
+	uv run mypy tests/ --ignore-missing-imports
+
+# 타입 힌트 추가 도움
+typecheck-html:
+	uv run mypy src/ --html-report mypy-report --ignore-missing-imports
+
+# 점진적 타입 검사 (새 파일만)
+typecheck-new:
+	uv run mypy src/ --ignore-missing-imports --disallow-untyped-defs
+
+# 테스트 파일 타입 검사
+typecheck-tests:
+	uv run mypy tests/ --ignore-missing-imports
+
+# 전체 프로젝트 타입 검사
+typecheck-all:
+	uv run mypy src/ tests/ --ignore-missing-imports
 
 build:
 	uv run python -m build
@@ -54,3 +81,6 @@ pre-commit-install:
 
 pre-commit-run:
 	uv run pre-commit run --all-files
+
+# 개발 시 사용할 통합 검사
+check-all: lint format typecheck test

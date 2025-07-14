@@ -191,7 +191,7 @@ class TestNamingValidator:
 
         return any(keyword in name for keyword in descriptive_keywords)
 
-    def _calculate_score(self, violations: list[str], suggestions: list[str], stats: dict) -> int:
+    def _calculate_score(self, violations: list[str], suggestions: list[str], stats: dict[str, Any]) -> int:
         """Calculate a quality score from 0-100."""
         base_score = 100
 
@@ -225,7 +225,7 @@ class TestNamingValidator:
                 "file_details": [],
             }
 
-        results = {
+        results: dict[str, Any] = {
             "files_processed": 0,
             "total_violations": 0,
             "total_suggestions": 0,

@@ -74,7 +74,7 @@ class UnittestToPytestMigrator:
                 content = f.read()
 
             original_content = content
-            stats = {
+            stats: dict[str, Any] = {
                 "file": str(file_path),
                 "assertions_converted": 0,
                 "classes_converted": 0,
@@ -100,7 +100,8 @@ class UnittestToPytestMigrator:
             content, setup_changes, manual_items = self._convert_setup_teardown(content)
             stats["setUp_converted"] = setup_changes[0]
             stats["tearDown_converted"] = setup_changes[1]
-            stats["manual_review_needed"].extend(manual_items)
+            if manual_items:
+                stats["manual_review_needed"].extend(manual_items)
 
             # Improve test naming if basic pattern detected
             content, naming_improvements = self._improve_test_naming(content)
@@ -248,7 +249,7 @@ class UnittestToPytestMigrator:
             print(f"No test files found in {directory} matching pattern {pattern}")
             return {"files_processed": 0, "files_migrated": 0, "errors": []}
 
-        results = {
+        results: dict[str, Any] = {
             "files_processed": 0,
             "files_migrated": 0,
             "total_assertions_converted": 0,
@@ -268,7 +269,9 @@ class UnittestToPytestMigrator:
                     results["files_migrated"] += 1
                     results["total_assertions_converted"] += file_result.get("assertions_converted", 0)
                     results["total_classes_converted"] += file_result.get("classes_converted", 0)
-                    results["manual_review_items"].extend(file_result.get("manual_review_needed", []))
+                    manual_items = file_result.get("manual_review_needed", [])
+                    if manual_items:
+                        results["manual_review_items"].extend(manual_items)
 
                 if "error" in file_result:
                     results["errors"].append(file_result)

@@ -8,6 +8,7 @@
 
 - Python `>=3.11`
 - [uv](https://github.com/astral-sh/uv) – 가상환경 생성 및 패키지 설치
+- `uv.lock` – 의존성 잠금 파일로 재현 가능한 빌드 보장
 
 ---
 
@@ -30,8 +31,9 @@
 ## 🧹 정적 분석 및 코드 품질
 
 - [ruff](https://docs.astral.sh/ruff/) – 린트 & 포맷팅
+- `ruff.toml` – 세밀한 린트 규칙 설정
 - [mypy](https://mypy-lang.org/) – 타입 검사
-- [pre-commit](https://pre-commit.com/) – 커밋 훅으로 ruff 실행
+- [pre-commit](https://pre-commit.com/) – 커밋 훅으로 ruff & mypy 실행
 
 ---
 
@@ -40,27 +42,42 @@
 - [Sphinx](https://www.sphinx-doc.org/)
 - 확장: `autodoc`, `napoleon`
 - 테마: `sphinx-rtd-theme`
+- `README.md` – 프로젝트 개요
+- `USAGE.md` – 상세 사용법 가이드
 
 ---
 
 ## 🚀 CI/CD 및 배포
 
 - [GitHub Actions](https://github.com/features/actions)
+  - `ci.yml` – 다중 Python 버전 테스트 (3.11, 3.12, 3.13)
+  - `release.yml` – 자동 PyPI 배포
+- [Codecov](https://codecov.io/) – 테스트 커버리지 시각화
 - 배포 방식: GitHub Release 또는 PyPI
+
+---
+
+## ⚡ 개발 자동화
+
+- `Makefile` – 개발 명령어 자동화 (test, lint, build 등)
+- 커버리지 리포트 – HTML 형태로 테스트 커버리지 시각화
 
 ---
 
 ## 📦 도구 요약
 
 ```
-uv
-hatch
-pytest
-pytest-cov
-ruff
-mypy
-pre-commit
-sphinx
-build
-twine
+uv               # 빠른 설치 및 가상환경
+uv.lock          # 의존성 잠금
+hatch            # 프로젝트 관리 & 빌드
+pytest           # 테스트
+pytest-cov       # 테스트 커버리지
+ruff             # 코드 린트 및 포맷팅
+ruff.toml        # 린트 규칙 설정
+mypy             # 타입 검사
+pre-commit       # Git 훅
+sphinx           # 문서화
+build            # 패키지 빌드
+twine            # PyPI 배포
+Makefile         # 개발 자동화
 ```
